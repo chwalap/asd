@@ -116,7 +116,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="CountConsistenComponents.cpp" />
-    <ClCompile Include="Graph.cpp" />
     <ClCompile Include="GraphRank.cpp" />
     <ClCompile Include="HasCycle.cpp" />
     <ClCompile Include="IsBipartiteGraph.cpp" />
@@ -128,6 +127,7 @@
     <ClInclude Include="GraphRank.h" />
     <ClInclude Include="HasCycle.h" />
     <ClInclude Include="IsBipartiteGraph.h" />
+    <ClInclude Include="MinClingTree.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

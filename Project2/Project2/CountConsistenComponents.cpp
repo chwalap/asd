@@ -2,7 +2,7 @@
 
 using namespace std;
 
-unsigned int CountConsistentComponents(const Graph &G) {
+unsigned int CountConsistentComponents(const Graph<bool> &G) {
 	if (G.getNumberOfVertices() == 0) {
 		cerr << "Graph is empty!" << endl;
 		return 0;
@@ -27,10 +27,10 @@ unsigned int CountConsistentComponents(const Graph &G) {
 				Q.pop();
 
 				// po wszystkich sasiadach
-				for (Vertex N : G.getNeighbours(V)) {
-					if (color[N] == Color::BLUE) { // jesli jeszcze nieodwiedzony
-						color[N] = Color::RED; // odwiedzony
-						Q.push(N); // dodanie do kolejki
+				for (auto N : G.getNeighbours(V)) {
+					if (color[N.first] == Color::BLUE) { // jesli jeszcze nieodwiedzony
+						color[N.first] = Color::RED; // odwiedzony
+						Q.push(N.first); // dodanie do kolejki
 					}
 				}
 			}

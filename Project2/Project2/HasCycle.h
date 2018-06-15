@@ -4,4 +4,4 @@
 
 #include <stack>
 
-bool HasCycle(const Graph &G);
+bool HasCycle(const Graph<bool> &G);
