@@ -46,6 +46,11 @@ public:
 		return V.size();
 	}
 
+	Vertex getFirstVertex() const {
+		if (V.size() > 0) return *V.begin();
+		return Vertex(0); // lepiej byloby cos rzucic
+	}
+
 	size_t getNumerOfEdges() const {
 		size_t edges = 0;
 		for (Vertex v : V)

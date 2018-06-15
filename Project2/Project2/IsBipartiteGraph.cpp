@@ -4,26 +4,27 @@ using namespace std;
 
 bool IsBipartiteGraph(const Graph<bool> &G) {
 	if (G.getNumberOfVertices() == 0) {
-		cerr << "Graph is empty!" << endl;
 		return false;
 	}
 
 	queue <Vertex> Q; // kolejka
-	Q.push(Vertex(0u)); // always first vertex
-	vector <Color> color(G.getNumberOfVertices(), Color::BLUE); // all vertices not visited yet
+	Vertex Current = G.getFirstVertex();
+	Q.push(Current); // always first vertex
+	map <Vertex, Color> color;
+	for (Vertex V : G.getVertices()) {
+		color[V] = Color::BLUE; // all vertices not visited yet
+	}
 
 	Color C = Color::RED;
-	color[0] = C;
+	color[Current] = C;
 
 	while (!Q.empty()) { // dopoki kolejka nie jest pusta
-						 // bierzemy pierwszy wierzcholek z kolejki
+		// bierzemy pierwszy wierzcholek z kolejki
 		Vertex V = Q.front();
 		Q.pop();
 
 		// zmianiamy kolor
 		C = (color[V] == Color::RED ? Color::GREEN : Color::RED);
-
-		//cout << "Jestem w wierzcholku: " << V << endl;
 
 		// dla jego kazdego sasiada
 		for (auto N : G.getNeighbours(V)) {
@@ -41,7 +42,6 @@ bool IsBipartiteGraph(const Graph<bool> &G) {
 
 		for (auto N : G.getNeighbours(V)) {
 			if (color[V] == color[N.first]) { // jesli wierzcholek ma taki sam kolor jak jakikolwiek jego sasiad to graf nie jest dwudzielny
-				cerr << V << " i " << N.first << " maja takie same kolory: " << color[N.first] << endl;
 				return false;
 			}
 		}

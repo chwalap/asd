@@ -2,7 +2,7 @@
 
 using namespace std;
 
-bool findCycle(const Graph<bool> &G, Vertex Start, Vertex Current, stack<Vertex> &S, vector<Color> &color);
+bool findCycle(const Graph<bool> &G, Vertex Start, Vertex Current, stack<Vertex> &S, map<Vertex, Color> &color);
 
 bool HasCycle(const Graph<bool> &G) {
 	if (G.getNumberOfVertices() == 0) {
@@ -12,7 +12,10 @@ bool HasCycle(const Graph<bool> &G) {
 
 	for (Vertex V : G.getVertices()) { // dla kazdego wierzcholka szukamy po kolei cyklu
 		stack <Vertex> S; // stos z cyklem
-		vector <Color> color(G.getNumberOfVertices(), Color::BLUE); // odwiedzone wierzcholki
+		map <Vertex, Color> color;
+		for (Vertex V : G.getVertices()) {
+			color[V] = Color::BLUE; // all vertices not visited yet
+		}
 
 		if (findCycle(G, V, V, S, color)) { // szukamy cyklu rekurencyjnie
 			/*while (!S.empty()) { cout << S.top() << ", "; S.pop(); } // wypisujemy cykl
@@ -24,7 +27,7 @@ bool HasCycle(const Graph<bool> &G) {
 	return false;
 }
 
-bool findCycle(const Graph<bool> &G, Vertex Start, Vertex Current, stack<Vertex> &S, vector<Color> &color) {
+bool findCycle(const Graph<bool> &G, Vertex Start, Vertex Current, stack<Vertex> &S, map<Vertex, Color> &color) {
 	color[Current] = Color::RED; // odwiedzamy obecny wierzcholek
 
 	for (auto U : G.getNeighbours(Current)) {

@@ -7,8 +7,12 @@ template <typename T>
 Graph<T> MinClingTree(const Graph <T> &G) {
 	Graph <T> H; // minimalne drzewo spinajace
 
+	if (G.getNumberOfVertices() == 0) {
+		return H;
+	}
+
 	// dodajemy pierwszy wierzcholek
-	Vertex Current = *G.getVertices().begin();
+	Vertex Current = G.getFirstVertex();
 	H.addVertex(Current);
 
 	// kolejka priorytetowa

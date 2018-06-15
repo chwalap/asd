@@ -10,7 +10,10 @@ unsigned int CountConsistentComponents(const Graph<bool> &G) {
 
 	int numberOfConsistentComponents = 0;
 
-	vector <Color> color(G.getNumberOfVertices(), Color::BLUE);
+	map <Vertex, Color> color;
+	for (Vertex V : G.getVertices()) {
+		color[V] = Color::BLUE; // all vertices not visited yet
+	}
 
 	for (Vertex V : G.getVertices()) {
 		if (color[V] == Color::BLUE) { // jeszcze nie odwiedzony
